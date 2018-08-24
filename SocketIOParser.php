@@ -1,6 +1,6 @@
 <?php
 /**
-    packet types
+  *  packet types
     0 open
     Sent from the server when a new transport is opened (recheck)
 
