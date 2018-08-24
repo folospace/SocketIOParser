@@ -1,40 +1,40 @@
 <?php
 /**
-    packet types
-    0 open
-    Sent from the server when a new transport is opened (recheck)
+  *  packet types
+  *  0 open
+  *  Sent from the server when a new transport is opened (recheck)
 
-    1 close
-    Request the close of this transport but does not shutdown the connection itself.
+  *  1 close
+  *  Request the close of this transport but does not shutdown the connection itself.
 
-    2 ping
-    Sent by the client. Server should answer with a pong packet containing the same data
+  *  2 ping
+  *  Sent by the client. Server should answer with a pong packet containing the same data
 
-    3 pong
-    Sent by the server to respond to ping packets.
+  *  3 pong
+  *  Sent by the server to respond to ping packets.
 
-    4 message
-    actual message, client and server should call their callbacks with the data.
+  *  4 message
+  *  actual message, client and server should call their callbacks with the data.
 
-    5 upgrade
-    Before engine.io switches a transport, it tests, if server and client can communicate over this transport. If this test succeed, the client sends an upgrade packets which requests the server to flush its cache on the old transport and switch to the new transport.
+  *  5 upgrade
+  *  Before engine.io switches a transport, it tests, if server and client can communicate over this transport. If this *    test succeed, the client sends an upgrade packets which requests the server to flush its cache on the old transport *   and switch to the new transport.
 
-    6 noop
-    A noop packet. Used primarily to force a poll cycle when an incoming websocket connection is received.
+  *  6 noop
+  *  A noop packet. Used primarily to force a poll cycle when an incoming websocket connection is received.
 
 
-    packet data types
-    Packet#CONNECT (0)
-    Packet#DISCONNECT (1)
-    Packet#EVENT (2)
-    Packet#ACK (3)
-    Packet#ERROR (4)
-    Packet#BINARY_EVENT (5)
-    Packet#BINARY_ACK (6)
+  *  packet data types
+  *  Packet#CONNECT (0)
+  *  Packet#DISCONNECT (1)
+  *  Packet#EVENT (2)
+  *  Packet#ACK (3)
+  *  Packet#ERROR (4)
+  *  Packet#BINARY_EVENT (5)
+  *  Packet#BINARY_ACK (6)
 
-    basic format    => $socket->emit("message", "hello world");
-                    => sprintf('%d%d["%s", "%s"]', $packetType, $packetDataType, $event, $data) 
-                    => 42["message", "hello world"]
+  *  basic format    => $socket->emit("message", "hello world");
+  *                  => sprintf('%d%d%s', $packetType, $packetDataType, json_encode([$event, $data])) 
+  *                  => 42["message", "hello world"]
             
  */
 class SocketIOParser
