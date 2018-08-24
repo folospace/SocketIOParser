@@ -35,8 +35,7 @@
   *  basic format    => $socket->emit("message", "hello world");
   *                  => sprintf('%d%d%s', $packetType, $packetDataType, json_encode([$event, $data])) 
   *                  => 42["message", "hello world"]
-            
- */
+  */
 class SocketIOParser
 {
     private static $instance;
